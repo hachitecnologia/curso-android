@@ -4,5 +4,6 @@
     <string name="app_name">Activities</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="minha_mensagem">Esta é uma mensagem acessível através da classe R</string>
 
 </resources>
