@@ -36,6 +36,14 @@
         <activity
             android:name="br.com.hachitecnologia.activities.MinhaQuintaActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="br.com.hachitecnologia.activities.MinhaSextaActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="br.com.hachitecnologia.activities.MinhaSetimaActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.com.hachitecnologia.activities.MinhaSextaActivity"
+            android:name="br.com.hachitecnologia.activities.MinhaOitavaActivity"
             android:label="@string/app_name" >
         </activity>
     </application>
