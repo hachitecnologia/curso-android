@@ -18,6 +18,10 @@ public class BroadcastReceiverA extends BroadcastReceiver {
 		// Apresenta a mensagem na tela, através de um Toast
 		Toast.makeText(context, "BroadcastReceiverA: " + msg, Toast.LENGTH_LONG)
 				.show();
+		// Altera o conteúdo da mensagem do Bundle
+		b.putString("mensagem", "Minha mensagem modificada");
+		// Disponibiliza o Bundle alterado para os próximos Broadcast Receivers
+		setResultExtras(b);
 	}
 
 }
