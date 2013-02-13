@@ -27,8 +27,8 @@ public class DisparaBroadcastActivity extends Activity {
 				 *  que será enviada ao Broadcast Receiver.
 				 */
 				intent.putExtra("mensagem", "Minha mensagem");
-				// Envia um broadcast
-				sendBroadcast(intent);
+				// Envia um broadcast de forma ordenada
+				sendOrderedBroadcast(intent, null);
 			}
 		});
 		

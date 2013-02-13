@@ -24,17 +24,17 @@
         </activity>
 
         <receiver android:name=".broadcastreceiver.BroadcastReceiverA" >
-            <intent-filter>
+            <intent-filter android:priority="20" >
                 <action android:name="MEU_BROADCAST_RECEIVER" />
             </intent-filter>
         </receiver>
         <receiver android:name=".broadcastreceiver.BroadcastReceiverB" >
-            <intent-filter>
+            <intent-filter android:priority="30" >
                 <action android:name="MEU_BROADCAST_RECEIVER" />
             </intent-filter>
         </receiver>
         <receiver android:name=".broadcastreceiver.BroadcastReceiverC" >
-            <intent-filter>
+            <intent-filter android:priority="10" >
                 <action android:name="MEU_BROADCAST_RECEIVER" />
             </intent-filter>
         </receiver>
