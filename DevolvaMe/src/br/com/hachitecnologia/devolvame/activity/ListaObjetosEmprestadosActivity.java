@@ -3,6 +3,8 @@ package br.com.hachitecnologia.devolvame.activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -21,8 +23,14 @@ import br.com.hachitecnologia.devolvame.modelo.ObjetoEmprestado;
 
 public class ListaObjetosEmprestadosActivity extends Activity {
 
+	// ID da opção "Ligar" do menu de contexto
+	private static final int MENU_LIGAR = Menu.FIRST + 1;
+
 	// ID da opção "Apagar" do menu de contexto
 	private static final int MENU_APAGAR = Menu.FIRST;
+
+	// ID da opção "Enviar SMS" do menu de contexto
+	private static final int MENU_ENVIAR_SMS = Menu.FIRST + 2;
 
 	/**
 	 * Variável de instância do tipo ListView que fará referência à ListView do
@@ -72,6 +80,10 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 
 		// Adiciona a opção "Apagar" ao Context Menu
 		menu.add(0, MENU_APAGAR, 0, "Apagar");
+		// Adiciona a opção "Ligar" ao Context Menu
+		menu.add(0, MENU_LIGAR, 0, "Ligar");
+		// Adiciona a opção "Enviar SMS" ao Context Menu
+		menu.add(0, MENU_ENVIAR_SMS, 0, "Enviar SMS");
 	}
 
 	/**
@@ -163,6 +175,38 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 			 * contexto, o retorno deve ser sempre "true"
 			 */
 			return true;
+		}
+
+		// Trata a ação da opção "Ligar" do menu de contexto
+		if (item.getItemId() == MENU_LIGAR) {
+
+			// Obtemos o objeto selecionado pelo usuário, na ListView
+			ObjetoEmprestado objeto = (ObjetoEmprestado) getListaObjetosEmprestados()
+					.getItemAtPosition(info.position);
+
+			// Efetua a chamada para o número de telefone cadastrado
+			Intent i = new Intent(Intent.ACTION_CALL);
+			i.setData(Uri.parse("tel:" + objeto.getContato().getTelefone()));
+			startActivity(i);
+		}
+
+		// Trata a ação da opção "Enviar SMS" do menu de contexto
+		if (item.getItemId() == MENU_ENVIAR_SMS) {
+
+			// Obtemos o objeto selecionado pelo usuário na ListView
+			ObjetoEmprestado objeto = (ObjetoEmprestado) getListaObjetosEmprestados()
+					.getItemAtPosition(info.position);
+
+			// Envia uma mensagem SMS de lembrete para o número de telefone
+			// cadastrado
+			Intent i = new Intent(Intent.ACTION_SENDTO);
+			i.setData(Uri.parse("sms:" + objeto.getContato().getTelefone()));
+			i.putExtra(
+					"sms_body",
+					"Olá! Você pegou emprestado o meu objeto \""
+							+ objeto.getObjeto()
+							+ "\" e ainda não o devolveu. Por favor, devolva-me o quanto antes.");
+			startActivity(i);
 		}
 
 		return super.onContextItemSelected(item);
