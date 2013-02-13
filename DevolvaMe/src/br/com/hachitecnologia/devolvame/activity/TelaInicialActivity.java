@@ -34,14 +34,14 @@ public class TelaInicialActivity extends ListActivity {
 		switch (position) {
 		// Evento da primeira opção apresentada na ListView: Emprestar objeto
 		case 0:
-			startActivity(new Intent(getApplicationContext(),
-					CadastraObjetoEmprestadoActivity.class));
+			startActivity(new Intent(
+					"br.com.hachitecnologia.devolvame.action.CADASTRA_OBJETO"));
 			break;
 		// Evento da segunda opção apresentada na ListView: Listar objetos
 		// emprestados
 		case 1:
-			startActivity(new Intent(getApplicationContext(),
-					ListaObjetosEmprestadosActivity.class));
+			startActivity(new Intent(
+					"br.com.hachitecnologia.devolvame.action.LISTA_OBJETOS"));
 			break;
 		// Evento da terceira opção apresentada na ListView: Sair
 		default:
