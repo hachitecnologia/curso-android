@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Preferências" >
+        <RingtonePreference
+            android:key="toque_notificacao"
+            android:summary="Selecione o som de toque da Notificação quando um lembrete é enviado"
+            android:title="Som de toque da Notificação" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

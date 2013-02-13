@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import br.com.hachitecnologia.devolvame.R;
 import br.com.hachitecnologia.devolvame.activity.TelaInicialActivity;
 
@@ -31,8 +32,12 @@ public class Notificacao {
 
 		// Oculta a notificação após o usuário clicar sobre ela
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		// Define o som de toque, alerta vibratório e LED padrões do dispositivo
-		notification.defaults = Notification.DEFAULT_ALL;
+
+		notification.defaults = Notification.DEFAULT_VIBRATE;
+
+		// Som de toque da Notificação
+		String somDeToque = Preferencias.getSomDeToqueDaNotificacao(context);
+		notification.sound = Uri.parse(somDeToque);
 
 		// Agendando a Notificação
 		NotificationManager notificationManager = (NotificationManager) context

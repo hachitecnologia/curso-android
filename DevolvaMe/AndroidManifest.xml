@@ -46,6 +46,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.PreferenciaActivity"
+            android:label="Preferências" >
+            <intent-filter>
+                <action android:name="br.com.hachitecnologia.devolvame.action.PREFERENCIAS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".service.EnviaSMSLembreteService" >
             <intent-filter>

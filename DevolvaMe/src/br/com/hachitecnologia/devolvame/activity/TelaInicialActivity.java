@@ -11,7 +11,8 @@ public class TelaInicialActivity extends ListActivity {
 
 	// Opções que serão apresentadas na ListView da tela principal.
 	private static final String[] OPCOES_DO_MENU = new String[] {
-			"Emprestar objeto", "Listar objetos emprestados", "Sair" };
+			"Emprestar objeto", "Listar objetos emprestados", "Preferências",
+			"Sair" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,11 @@ public class TelaInicialActivity extends ListActivity {
 		case 1:
 			startActivity(new Intent(
 					"br.com.hachitecnologia.devolvame.action.LISTA_OBJETOS"));
+			break;
+		// Evento da terceira opção apresentada na ListView: Preferências
+		case 2:
+			startActivity(new Intent(
+					"br.com.hachitecnologia.devolvame.action.PREFERENCIAS"));
 			break;
 		// Evento da terceira opção apresentada na ListView: Sair
 		default:
