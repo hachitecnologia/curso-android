@@ -10,14 +10,14 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String NOME_DO_BANCO = "devolva_me";
 
 	// Versão atual do banco de dados
-	private static final int VERSAO_DO_BANCO = 2;
+	private static final int VERSAO_DO_BANCO = 3;
 
 	public DBHelper(Context context) {
 		super(context, NOME_DO_BANCO, null, VERSAO_DO_BANCO);
 	}
 
 	/**
-	 * Cria a tabela “objeto_emprestado” no banco de dados, caso ela não exista.
+	 * Cria a tabela no banco de dados, caso ela nao exista.
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -26,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ ",objeto TEXT NOT NULL"
 				+ ",contato_id INTEGER NOT NULL"
 				+ ",data_emprestimo INTEGER NOT NULL"
+				+ ",foto BLOB"
 				+ ");";
 		db.execSQL(sql);
 	}

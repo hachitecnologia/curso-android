@@ -11,6 +11,7 @@ public class ObjetoEmprestado implements Serializable {
 	private String objeto;
 	private Calendar dataEmprestimo;
 	private Contato contato = new Contato();
+	private byte[ ] foto;
 
 	public Long getId() {
 		return id;
@@ -42,6 +43,14 @@ public class ObjetoEmprestado implements Serializable {
 
 	public void setContato(Contato contato) {
 		this.contato = contato;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 }

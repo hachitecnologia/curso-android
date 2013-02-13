@@ -31,6 +31,7 @@ public class ObjetoEmprestadoDAO {
 		values.put("objeto", objeto.getObjeto());
 		values.put("data_emprestimo", System.currentTimeMillis());
 		values.put("contato_id", objeto.getContato().getId());
+		values.put("foto", objeto.getFoto());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -69,6 +70,8 @@ public class ObjetoEmprestadoDAO {
 				int contatoID = c.getInt(c.getColumnIndex("contato_id"));
 				Contato contato = Contatos.getContato(contatoID, context);
 				objeto.setContato(contato);
+				
+				objeto.setFoto(c.getBlob(c.getColumnIndex("foto")));
 
 				objetos.add(objeto);
 			}
@@ -95,6 +98,7 @@ public class ObjetoEmprestadoDAO {
 		ContentValues values = new ContentValues();
 		values.put("objeto", objeto.getObjeto());
 		values.put("contato_id", objeto.getContato().getId());
+		values.put("foto", objeto.getFoto());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
