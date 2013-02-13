@@ -1,6 +1,7 @@
 package br.com.hachitecnologia.devolvame.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -32,6 +33,8 @@ public class ObjetoEmprestadoDAO {
 		values.put("data_emprestimo", System.currentTimeMillis());
 		values.put("contato_id", objeto.getContato().getId());
 		values.put("foto", objeto.getFoto());
+		values.put("lembrete_ativo", objeto.isLembreteAtivo());
+		values.put("data_lembrete", objeto.getDataLembrete().getTimeInMillis());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -44,7 +47,9 @@ public class ObjetoEmprestadoDAO {
 		db.close();
 	}
 
-
+	/**
+	 * Lista todos os registros da tabela “objeto_emprestado”
+	 */
 	public List<ObjetoEmprestado> listaTodos() {
 
 		// Cria um List guardar os objetos consultados no banco de dados
@@ -70,8 +75,17 @@ public class ObjetoEmprestadoDAO {
 				int contatoID = c.getInt(c.getColumnIndex("contato_id"));
 				Contato contato = Contatos.getContato(contatoID, context);
 				objeto.setContato(contato);
-				
+
 				objeto.setFoto(c.getBlob(c.getColumnIndex("foto")));
+
+				boolean lembreteAtivo = c.getInt(c
+						.getColumnIndex("lembrete_ativo")) == 1 ? true : false;
+				objeto.setLembreteAtivo(lembreteAtivo);
+				long dataLembrete = c.getLong((c
+						.getColumnIndex("data_lembrete")));
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(dataLembrete);
+				objeto.setDataLembrete(cal);
 
 				objetos.add(objeto);
 			}
@@ -88,7 +102,6 @@ public class ObjetoEmprestadoDAO {
 		return objetos;
 	}
 
-
 	/**
 	 * Altera o registro no banco de dados.
 	 */
@@ -99,6 +112,8 @@ public class ObjetoEmprestadoDAO {
 		values.put("objeto", objeto.getObjeto());
 		values.put("contato_id", objeto.getContato().getId());
 		values.put("foto", objeto.getFoto());
+		values.put("lembrete_ativo", objeto.isLembreteAtivo());
+		values.put("data_lembrete", objeto.getDataLembrete().getTimeInMillis());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -151,6 +166,61 @@ public class ObjetoEmprestadoDAO {
 
 		// Encerra a conexão com o banco de dados
 		db.close();
+	}
+
+	public List<ObjetoEmprestado> consultaObjetosComAlarmeASerDisparado() {
+		// Cria um List guardar os objetos consultados no banco de dados
+		List<ObjetoEmprestado> objetos = new ArrayList<ObjetoEmprestado>();
+
+		// Instancia uma nova conexão com o banco de dados em modo leitura
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+		// Executa a consulta no banco de dados
+		String sql = "select * from objeto_emprestado "
+				+ "where lembrete_ativo = 1 and data_lembrete > ?";
+		Long dataAtualEmMilissegundos = Calendar.getInstance()
+				.getTimeInMillis();
+		Cursor c = db.rawQuery(sql,
+				new String[] { dataAtualEmMilissegundos.toString() });
+
+		/**
+		 * Percorre o Cursor, injetando os dados consultados em um objeto do
+		 * tipo ObjetoEmprestado e adicionando-os na List
+		 */
+		try {
+			while (c.moveToNext()) {
+				ObjetoEmprestado objeto = new ObjetoEmprestado();
+				objeto.setId(c.getLong(c.getColumnIndex("_id")));
+				objeto.setObjeto(c.getString(c.getColumnIndex("objeto")));
+
+				int contatoID = c.getInt(c.getColumnIndex("contato_id"));
+				Contato contato = Contatos.getContato(contatoID, context);
+				contato.setId(contatoID);
+				objeto.setContato(contato);
+
+				objeto.setFoto(c.getBlob(c.getColumnIndex("foto")));
+				boolean lembreteAtivo = c.getInt(c
+						.getColumnIndex("lembrete_ativo")) == 1 ? true : false;
+				objeto.setLembreteAtivo(lembreteAtivo);
+				long dataLembrete = c.getLong((c
+						.getColumnIndex("data_lembrete")));
+				Calendar cal = Calendar.getInstance();
+				cal.setTimeInMillis(dataLembrete);
+				objeto.setDataLembrete(cal);
+
+				objetos.add(objeto);
+			}
+
+		} finally {
+			// Encerra o Cursor
+			c.close();
+		}
+
+		// Encerra a conexão com o banco de dados
+		db.close();
+
+		// Retorna uma lista com os objetos consultados
+		return objetos;
 	}
 
 }

@@ -1,81 +1,134 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff"
-    android:orientation="vertical"
-    android:paddingBottom="15.0dip"
-    android:paddingLeft="15.0dip"
-    android:paddingRight="15.0dip"
-    android:paddingTop="15.0dip" >
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center" >
-
-        <ImageView
-            android:id="@+id/foto_objeto"
-            android:layout_width="86.0dip"
-            android:layout_height="86.0dip"
-            android:padding="0dip"
-            android:src="@android:drawable/ic_menu_camera" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Objeto:" />
-
-    <EditText
-        android:id="@+id/cadastro_objeto_campo_objeto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Informe o nome do objeto"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="15.0dip"
-        android:text="Emprestado para:" />
-
-    <Button
-        android:id="@+id/botao_selecionar_contato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Selecionar na Lista de Contatos" />
-
-    <TextView
-        android:id="@+id/cadastro_objeto_campo_pessoa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="15.0sp"
-        android:visibility="gone" />
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingBottom="15.0dip"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="15.0dip"
         android:paddingTop="15.0dip" >
 
-        <Button
-            android:id="@+id/cadastra_objeto_botao_salvar"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Salvar" />
+            android:layout_gravity="center"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/foto_objeto"
+                android:layout_width="86.0dip"
+                android:layout_height="86.0dip"
+                android:padding="0dip"
+                android:src="@android:drawable/ic_menu_camera" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.0dip"
+            android:text="Objeto:" />
+
+        <EditText
+            android:id="@+id/cadastro_objeto_campo_objeto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Informe o nome do objeto"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15.0dip"
+            android:text="Emprestado para:" />
 
         <Button
-            android:id="@+id/cadastra_objeto_botao_cancelar"
+            android:id="@+id/botao_selecionar_contato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            android:layout_gravity="center"
+            android:text="Selecionar na lista de Contatos" />
+
+        <TextView
+            android:id="@+id/cadastro_objeto_campo_pessoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="15.0sp"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/cadastro_objeto_campo_lembrete_ativo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ativar lembrete?"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/cadastro_objeto_label_lembrete_data_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="15.0dip"
+            android:text="Data/Hora da notificação"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/cadastro_objeto_label_lembrete_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15.0dip"
+            android:text="Data:"
+            android:visibility="gone" />
+
+        <DatePicker
+            android:id="@+id/cadastra_objeto_campo_lembrete_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:calendarViewShown="false"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/cadastro_objeto_label_lembrete_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15.0dip"
+            android:text="Hora:"
+            android:visibility="gone" />
+
+        <TimePicker
+            android:id="@+id/cadastra_objeto_campo_lembrete_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="15.0dip" >
+
+            <Button
+                android:id="@+id/cadastra_objeto_botao_salvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+
+            <Button
+                android:id="@+id/cadastra_objeto_botao_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

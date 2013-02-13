@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -44,6 +46,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.EnviaSMSLembreteService" >
+            <intent-filter>
+                <action android:name="br.com.hachitecnologia.devolvame.action.ENVIA_SMS_LEMBRETE" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".receiver.AtivaAlarmesNoBoot" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

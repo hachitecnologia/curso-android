@@ -11,7 +11,9 @@ public class ObjetoEmprestado implements Serializable {
 	private String objeto;
 	private Calendar dataEmprestimo;
 	private Contato contato = new Contato();
-	private byte[ ] foto;
+	private byte[] foto;
+	private boolean lembreteAtivo;
+	private Calendar dataLembrete;
 
 	public Long getId() {
 		return id;
@@ -51,6 +53,22 @@ public class ObjetoEmprestado implements Serializable {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public boolean isLembreteAtivo() {
+		return lembreteAtivo;
+	}
+
+	public void setLembreteAtivo(boolean lembreteAtivo) {
+		this.lembreteAtivo = lembreteAtivo;
+	}
+
+	public Calendar getDataLembrete() {
+		return dataLembrete;
+	}
+
+	public void setDataLembrete(Calendar dataLembrete) {
+		this.dataLembrete = dataLembrete;
 	}
 
 }
