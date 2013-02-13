@@ -29,25 +29,20 @@
         android:paddingTop="15.0dip"
         android:text="Emprestado para:" />
 
-    <EditText
-        android:id="@+id/cadastro_objeto_campo_pessoa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Informe o nome da pessoa"
-        android:inputType="textPersonName" />
-
-    <TextView
+    <Button
+        android:id="@+id/botao_selecionar_contato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="15.0dip"
-        android:text="Telefone:" />
+        android:layout_gravity="center"
+        android:text="Selecionar na Lista de Contatos" />
 
-    <EditText
-        android:id="@+id/cadastro_objeto_campo_telefone"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/cadastro_objeto_campo_pessoa"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Informe o telefone da pessoa"
-        android:inputType="phone" />
+        android:layout_gravity="center"
+        android:textSize="15.0sp"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

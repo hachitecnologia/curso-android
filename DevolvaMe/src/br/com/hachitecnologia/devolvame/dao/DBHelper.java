@@ -10,7 +10,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String NOME_DO_BANCO = "devolva_me";
 
 	// Versão atual do banco de dados
-	private static final int VERSAO_DO_BANCO = 1;
+	private static final int VERSAO_DO_BANCO = 2;
 
 	public DBHelper(Context context) {
 		super(context, NOME_DO_BANCO, null, VERSAO_DO_BANCO);
@@ -23,9 +23,10 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String sql = "CREATE TABLE objeto_emprestado ("
 				+ "_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"
-				+ ",objeto TEXT NOT NULL" + ",pessoa TEXT NOT NULL"
-				+ ",telefone TEXT NOT NULL"
-				+ ",data_emprestimo INTEGER NOT NULL" + ");";
+				+ ",objeto TEXT NOT NULL"
+				+ ",contato_id INTEGER NOT NULL"
+				+ ",data_emprestimo INTEGER NOT NULL"
+				+ ");";
 		db.execSQL(sql);
 	}
 

@@ -7,14 +7,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import br.com.hachitecnologia.devolvame.modelo.Contato;
 import br.com.hachitecnologia.devolvame.modelo.ObjetoEmprestado;
+import br.com.hachitecnologia.devolvame.util.Contatos;
 
 public class ObjetoEmprestadoDAO {
 
 	private DBHelper dbHelper;
+	private Context context;
 
 	public ObjetoEmprestadoDAO(Context context) {
 		dbHelper = new DBHelper(context);
+		this.context = context;
 	}
 
 	/**
@@ -26,8 +30,7 @@ public class ObjetoEmprestadoDAO {
 		ContentValues values = new ContentValues();
 		values.put("objeto", objeto.getObjeto());
 		values.put("data_emprestimo", System.currentTimeMillis());
-		values.put("pessoa", objeto.getContato().getNome());
-		values.put("telefone", objeto.getContato().getTelefone());
+		values.put("contato_id", objeto.getContato().getId());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -40,12 +43,10 @@ public class ObjetoEmprestadoDAO {
 		db.close();
 	}
 
-	/**
-	 * Lista todos os registros da tabela “objeto_emprestado”
-	 */
+
 	public List<ObjetoEmprestado> listaTodos() {
 
-		// Cria um List para guardar os objetos consultados no banco de dados
+		// Cria um List guardar os objetos consultados no banco de dados
 		List<ObjetoEmprestado> objetos = new ArrayList<ObjetoEmprestado>();
 
 		// Instancia uma nova conexão com o banco de dados em modo leitura
@@ -64,10 +65,11 @@ public class ObjetoEmprestadoDAO {
 				ObjetoEmprestado objeto = new ObjetoEmprestado();
 				objeto.setId(c.getLong(c.getColumnIndex("_id")));
 				objeto.setObjeto(c.getString(c.getColumnIndex("objeto")));
-				objeto.getContato().setNome(
-						c.getString(c.getColumnIndex("pessoa")));
-				objeto.getContato().setTelefone(
-						c.getString(c.getColumnIndex("telefone")));
+
+				int contatoID = c.getInt(c.getColumnIndex("contato_id"));
+				Contato contato = Contatos.getContato(contatoID, context);
+				objeto.setContato(contato);
+
 				objetos.add(objeto);
 			}
 
@@ -83,6 +85,7 @@ public class ObjetoEmprestadoDAO {
 		return objetos;
 	}
 
+
 	/**
 	 * Altera o registro no banco de dados.
 	 */
@@ -91,8 +94,7 @@ public class ObjetoEmprestadoDAO {
 		// atualizados no banco de dados
 		ContentValues values = new ContentValues();
 		values.put("objeto", objeto.getObjeto());
-		values.put("pessoa", objeto.getContato().getNome());
-		values.put("telefone", objeto.getContato().getTelefone());
+		values.put("contato_id", objeto.getContato().getId());
 
 		// Instancia uma conexão com o banco de dados, em modo de gravação
 		SQLiteDatabase db = dbHelper.getWritableDatabase();

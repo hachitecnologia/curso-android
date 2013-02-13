@@ -1,11 +1,17 @@
 package br.com.hachitecnologia.devolvame.activity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import br.com.hachitecnologia.devolvame.R;
 import br.com.hachitecnologia.devolvame.dao.ObjetoEmprestadoDAO;
@@ -15,10 +21,12 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 
 	private ObjetoEmprestado objetoEmprestado;
 	private EditText campoObjeto;
-	private EditText campoNomePessoa;
-	private EditText campoTelefone;
+	private TextView campoNomePessoa;
+	private Button botaoSelecionarContato;
 	private Button botaoSalvar;
 	private Button botaoCancelar;
+
+	private static final int ID_RETORNO_SELECIONA_CONTATO = 1234;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +35,8 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 		setContentView(R.layout.activity_cadastra_objeto_emprestado);
 
 		campoObjeto = (EditText) findViewById(R.id.cadastro_objeto_campo_objeto);
-		campoNomePessoa = (EditText) findViewById(R.id.cadastro_objeto_campo_pessoa);
-		campoTelefone = (EditText) findViewById(R.id.cadastro_objeto_campo_telefone);
+		campoNomePessoa = (TextView) findViewById(R.id.cadastro_objeto_campo_pessoa);
+		botaoSelecionarContato = (Button) findViewById(R.id.botao_selecionar_contato);
 		botaoSalvar = (Button) findViewById(R.id.cadastra_objeto_botao_salvar);
 		botaoCancelar = (Button) findViewById(R.id.cadastra_objeto_botao_cancelar);
 
@@ -43,8 +51,18 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 			objetoEmprestado = new ObjetoEmprestado();
 		} else {
 			campoObjeto.setText(objetoEmprestado.getObjeto());
+
+			// Remove da tela o botão "Selecionar contato na lista"
+			botaoSelecionarContato.setVisibility(View.GONE);
+
+			/**
+			 * Alteramos a TextView "cadastro_objeto_campo_pessoa" definindo em
+			 * seu texto o nome do contato que consultamos no Content Provider e
+			 * definimos a visibilidade desta View para VISIBLE, para que ela
+			 * fique visível para o usuário.
+			 */
 			campoNomePessoa.setText(objetoEmprestado.getContato().getNome());
-			campoTelefone.setText(objetoEmprestado.getContato().getTelefone());
+			campoNomePessoa.setVisibility(View.VISIBLE);
 		}
 
 		/**
@@ -56,10 +74,6 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 				// Injeta no objeto "objetoEmprestado" os dados informados pelo
 				// usuário
 				objetoEmprestado.setObjeto(campoObjeto.getText().toString());
-				objetoEmprestado.getContato().setNome(
-						campoNomePessoa.getText().toString());
-				objetoEmprestado.getContato().setTelefone(
-						campoTelefone.getText().toString());
 
 				// Instancia o DAO para persistir o objeto
 				ObjetoEmprestadoDAO dao = new ObjetoEmprestadoDAO(
@@ -70,9 +84,10 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 				// Mostra para o usuário uma mensagem de sucesso na operação
 				Toast.makeText(getApplicationContext(),
 						"Objeto salvo com sucesso!", Toast.LENGTH_LONG).show();
-				
+
 				// Depois de salvar, vai para a Lista dos objetos emprestados
-				startActivity(new Intent(getApplicationContext(), ListaObjetosEmprestadosActivity.class));
+				startActivity(new Intent(getApplicationContext(),
+						ListaObjetosEmprestadosActivity.class));
 			}
 
 		});
@@ -87,5 +102,127 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 			}
 		});
 
+		/**
+		 * O botão "Selecionar contato na lista" irá abrir a Activity de
+		 * Contatos do Android para que o usuário possa selecionar um contato na
+		 * lista.
+		 */
+		botaoSelecionarContato.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				/**
+				 * Na Intent, definimos a Action Intent.ACTION_PICK do Android,
+				 * usada para retornar um determinado item selecionado em uma
+				 * lista.
+				 */
+				Intent i = new Intent(Intent.ACTION_PICK);
+				/**
+				 * Passamos a lista de contatos, do aplicativo de Contatos
+				 * nativo do Android, para que o usuário possa selecionar um
+				 * contato na lista.
+				 */
+				i.setData(Contacts.CONTENT_URI);
+				// Abre a lista com os contatos para seleção
+				startActivityForResult(i, ID_RETORNO_SELECIONA_CONTATO);
+			}
+		});
+
+		/**
+		 * Ao clicar sobre o nome do Contato selecionado, o usuário será
+		 * direcionado para a Activity de Contatos do Android, permitindo-o
+		 * selecionar um outro contato.
+		 */
+		campoNomePessoa.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				/**
+				 * Na Intent, definimos a Action Intent.ACTION_PICK do Android,
+				 * usada para retornar um determinado item selecionado em uma
+				 * lista.
+				 */
+				Intent i = new Intent(Intent.ACTION_PICK);
+				/**
+				 * Passamos a lista de contatos, do aplicativo de Contatos
+				 * nativo do Android, para que o usuário possa selecionar um
+				 * contato na lista.
+				 */
+				i.setData(Contacts.CONTENT_URI);
+				// Abre a lista com os contatos para seleção
+				startActivityForResult(i, ID_RETORNO_SELECIONA_CONTATO);
+			}
+		});
+
 	}
+
+	/**
+	 * Trata o resultado vindo de uma Action chamada através do método
+	 * startActivityForResult().
+	 */
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+
+		/**
+		 * Trata o retorno vindo da tela de seleção de contatos.
+		 */
+		case (ID_RETORNO_SELECIONA_CONTATO):
+			if (resultCode == Activity.RESULT_OK) {
+				/**
+				 * Após selecionado o contato pelo usuário, recebemos uma URI
+				 * que irá apontar para o contato selecionado.
+				 */
+				Uri contactData = data.getData();
+				/**
+				 * Usaremos um ContentResolver para consultar os dados do
+				 * contato selecionado no ContentProvider do aplicativo de
+				 * Contatos do Android.
+				 */
+				ContentResolver contentResolver = getContentResolver();
+				/**
+				 * Executamos a query e atribuímos o resultado em um Cursor para
+				 * navegarmos sobre os dados retornados pelo ContentProvider. Na
+				 * query passamos apenas a URI, sem definir nenhum parâmetro
+				 * adicional, já que a URI retornada pela Action aponta
+				 * diretamente para o contato selecionado.
+				 */
+				Cursor cursor = contentResolver.query(contactData, null, null,
+						null, null);
+				// Iteramos sobre o Cursor para obter os dados desejados
+				if (cursor.moveToFirst()) {
+					// Obtém o ID do contato
+					objetoEmprestado.getContato().setId(
+							cursor.getInt(cursor.getColumnIndex(Phone._ID)));
+					// Obtém o Nome do contato
+					objetoEmprestado.getContato().setNome(
+							cursor.getString(cursor
+									.getColumnIndex(Phone.DISPLAY_NAME)));
+
+					/**
+					 * Após selecionado o contato, não há mais necessidade de
+					 * mostrar o botão "Selecionar contato na lista". Portanto,
+					 * iremos esconder o botão definindo sua visibilidade para
+					 * GONE.
+					 */
+					botaoSelecionarContato.setVisibility(View.GONE);
+
+					/**
+					 * Alteramos a TextView "cadastro_objeto_campo_pessoa"
+					 * definindo em seu texto o nome do contato selecionado e
+					 * definimos a visibilidade desta View para VISIBLE, para
+					 * que ela fique visível para o usuário.
+					 */
+					campoNomePessoa.setText(objetoEmprestado.getContato()
+							.getNome());
+					campoNomePessoa.setVisibility(View.VISIBLE);
+				}
+
+				// Fechamos o Cursor
+				cursor.close();
+			}
+			break;
+		}
+	}
+
 }
