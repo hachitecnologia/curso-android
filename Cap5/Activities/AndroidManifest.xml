@@ -24,6 +24,14 @@
         <activity
             android:name="br.com.hachitecnologia.activities.MinhaSegundaActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="br.com.hachitecnologia.activities.MinhaTerceiraActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="br.com.hachitecnologia.activities.MinhaQuartaActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
