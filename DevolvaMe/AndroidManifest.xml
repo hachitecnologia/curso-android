@@ -18,17 +18,18 @@
         <activity
             android:name="br.com.hachitecnologia.devolvame.activity.CadastraObjetoEmprestadoActivity"
             android:label="@string/title_activity_cadastra_objeto_emprestado" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="br.com.hachitecnologia.devolvame.activity.ListaObjetosEmprestadosActivity"
             android:label="@string/title_activity_lista_objetos_emprestados" >
+        </activity>
+        <activity
+            android:name="br.com.hachitecnologia.devolvame.activity.TelaInicialActivity"
+            android:label="@string/title_activity_tela_inicial" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

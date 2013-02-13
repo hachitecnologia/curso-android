@@ -6,5 +6,6 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_cadastra_objeto_emprestado">Emprestar Objeto</string>
     <string name="title_activity_lista_objetos_emprestados">Objetos Emprestados</string>
+    <string name="title_activity_tela_inicial">Devolva.Me</string>
 
 </resources>
