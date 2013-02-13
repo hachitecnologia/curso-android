@@ -20,6 +20,7 @@ import br.com.hachitecnologia.devolvame.adapter.ListaObjetosEmprestadosAdapter;
 import br.com.hachitecnologia.devolvame.dao.ObjetoEmprestadoDAO;
 import br.com.hachitecnologia.devolvame.listener.ListaObjetosEmprestadosListener;
 import br.com.hachitecnologia.devolvame.modelo.ObjetoEmprestado;
+import br.com.hachitecnologia.devolvame.util.Telefonia;
 
 public class ListaObjetosEmprestadosActivity extends Activity {
 
@@ -199,14 +200,12 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 
 			// Envia uma mensagem SMS de lembrete para o número de telefone
 			// cadastrado
-			Intent i = new Intent(Intent.ACTION_SENDTO);
-			i.setData(Uri.parse("sms:" + objeto.getContato().getTelefone()));
-			i.putExtra(
-					"sms_body",
-					"Olá! Você pegou emprestado o meu objeto \""
-							+ objeto.getObjeto()
-							+ "\" e ainda não o devolveu. Por favor, devolva-me o quanto antes.");
-			startActivity(i);
+			String mensagem = "Olá, você pegou emprestado o meu objeto \""
+					+ objeto.getObjeto()
+					+ "\" e ainda não o devolveu. Por favor, devolva-me o quanto antes.";
+			Telefonia.enviaSMS(objeto.getContato().getTelefone(), mensagem);
+			Toast.makeText(getApplicationContext(), "Lembrete enviado.",
+					Toast.LENGTH_LONG).show();
 		}
 
 		return super.onContextItemSelected(item);
