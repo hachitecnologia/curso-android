@@ -1,5 +1,6 @@
 package br.com.hachitecnologia.devolvame.activity;
 
+import br.com.hachitecnologia.devolvame.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +10,15 @@ import android.widget.ListView;
 
 public class TelaInicialActivity extends ListActivity {
 
-	// Opções que serão apresentadas na ListView da tela principal.
-	private static final String[] OPCOES_DO_MENU = new String[] {
-			"Emprestar objeto", "Listar objetos emprestados", "Preferências",
-			"Sair" };
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		final String[] OPCOES_DO_MENU = new String[] {
+				getString(R.string.opcao_emprestar_objeto), 
+				getString(R.string.opcao_listar_objetos_emprestados), 
+				getString(R.string.opcao_preferencias),
+				getString(R.string.opcao_sair) };
 
 		/**
 		 * Define um ArrayAdapter com as opções definidas no Array de String

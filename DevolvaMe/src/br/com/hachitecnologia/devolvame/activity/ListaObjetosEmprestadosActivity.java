@@ -80,11 +80,11 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 
 		// Adiciona a opção "Apagar" ao Context Menu
-		menu.add(0, MENU_APAGAR, 0, "Apagar");
+		menu.add(0, MENU_APAGAR, 0, getString(R.string.opcao_apagar));
 		// Adiciona a opção "Ligar" ao Context Menu
-		menu.add(0, MENU_LIGAR, 0, "Ligar");
+		menu.add(0, MENU_LIGAR, 0, getString(R.string.opcao_ligar));
 		// Adiciona a opção "Enviar SMS" ao Context Menu
-		menu.add(0, MENU_ENVIAR_SMS, 0, "Enviar SMS");
+		menu.add(0, MENU_ENVIAR_SMS, 0, getString(R.string.opcao_enviar_sms));
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 			 * foi realizada com sucesso
 			 */
 			Toast.makeText(getApplicationContext(),
-					"Registro removido com sucesso!", Toast.LENGTH_LONG).show();
+					getString(R.string.mensagem_registro_removido_sucesso), Toast.LENGTH_LONG).show();
 
 			/**
 			 * Após tratar com sucesso o evento de uma opção do menu de
@@ -200,11 +200,10 @@ public class ListaObjetosEmprestadosActivity extends Activity {
 
 			// Envia uma mensagem SMS de lembrete para o número de telefone
 			// cadastrado
-			String mensagem = "Olá, você pegou emprestado o meu objeto \""
-					+ objeto.getObjeto()
-					+ "\" e ainda não o devolveu. Por favor, devolva-me o quanto antes.";
+			String mensagem = String.format(getString(R.string.mensagem_sms_lembrete_devolvame),
+					objeto.getObjeto());
 			Telefonia.enviaSMS(objeto.getContato().getTelefone(), mensagem);
-			Toast.makeText(getApplicationContext(), "Lembrete enviado.",
+			Toast.makeText(getApplicationContext(), getString(R.string.mensagem_lembrete_enviado),
 					Toast.LENGTH_LONG).show();
 		}
 

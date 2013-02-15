@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Nome do aplicativo -->
     <string name="app_name">Devolva.Me</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    
+    <!-- Titulos -->
     <string name="title_activity_cadastra_objeto_emprestado">Emprestar Objeto</string>
     <string name="title_activity_lista_objetos_emprestados">Objetos Emprestados</string>
     <string name="title_activity_tela_inicial">Devolva.Me</string>
-
+    <string name="title_activity_preferencia">Preferências</string>
+    
+    <!-- Hints -->
+    <string name="hint_informe_o_nome_do_objeto">Informe o nome do objeto</string>
+    
+    <!-- Labels -->
+    <string name="label_ativar_lembrete">Ativar lembrete?</string>
+    <string name="label_data_hora_notificacao">Data/Hora da notificação</string>
+    <string name="label_data">Data:</string>
+    <string name="label_hora">Hora:</string>
+    <string name="label_objeto">Objeto:</string>
+    <string name="label_emprestado_para">Emprestado para:</string>
+    
+    <!-- Botoes -->
+    <string name="botao_salvar">Salvar</string>
+    <string name="botao_cancelar">Cancelar</string>
+    <string name="botao_selecionar_contato">Selecionar na lista de Contatos</string>
+    
+    <!-- Opcoes de Listas e Menus  -->
+    <string name="opcao_emprestar_objeto">Emprestar objeto</string>
+    <string name="opcao_listar_objetos_emprestados">Listar objetos emprestados</string>
+    <string name="opcao_preferencias">Preferências</string>
+    <string name="opcao_sair">Sair</string>
+    <string name="opcao_apagar">Apagar</string>
+    <string name="opcao_ligar">Ligar</string>
+    <string name="opcao_enviar_sms">Enviar SMS</string>
+    
+    <!-- Mensagens apresentadas por Toasts e outros -->
+    <string name="mensagem_objeto_salvo_sucesso">Objeto salvo com sucesso!</string>
+    <string name="mensagem_registro_removido_sucesso">Registro removido com sucesso!</string>
+    <string name="mensagem_lembrete_enviado">Lembrete enviado</string>
+    <string name="mensagem_sms_lembrete_devolvame">Olá, você pegou emprestado o meu objeto %1$s e ainda não o devolveu. Por favor, devolva-me o quanto antes.</string>
+    
+    <!-- Preferencias -->
+	<string name="summary_som_de_toque_notificacao">Selecione o som de toque da Notificação quando um lembrete é enviado</string>
+	<string name="titulo_som_de_toque_notificacao">Som de toque da Notificação</string>
+	
 </resources>

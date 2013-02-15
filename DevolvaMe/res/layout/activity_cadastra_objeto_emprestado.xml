@@ -30,13 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15.0dip"
-            android:text="Objeto:" />
+            android:text="@string/label_objeto" />
 
         <EditText
             android:id="@+id/cadastro_objeto_campo_objeto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Informe o nome do objeto"
+            android:hint="@string/hint_informe_o_nome_do_objeto"
             android:inputType="textPersonName" >
 
             <requestFocus />
@@ -46,14 +46,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="15.0dip"
-            android:text="Emprestado para:" />
+            android:text="@string/label_emprestado_para" />
 
         <Button
             android:id="@+id/botao_selecionar_contato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Selecionar na lista de Contatos" />
+            android:text="@string/botao_selecionar_contato" />
 
         <TextView
             android:id="@+id/cadastro_objeto_campo_pessoa"
@@ -67,7 +67,7 @@
             android:id="@+id/cadastro_objeto_campo_lembrete_ativo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ativar lembrete?"
+            android:text="@string/label_ativar_lembrete"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="15.0dip"
-            android:text="Data/Hora da notificação"
+            android:text="@string/label_data_hora_notificacao"
             android:visibility="gone" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="15.0dip"
-            android:text="Data:"
+            android:text="@string/label_data"
             android:visibility="gone" />
 
         <DatePicker
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="15.0dip"
-            android:text="Hora:"
+            android:text="@string/label_hora"
             android:visibility="gone" />
 
         <TimePicker
@@ -121,13 +121,13 @@
                 android:id="@+id/cadastra_objeto_botao_salvar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Salvar" />
+                android:text="@string/botao_salvar" />
 
             <Button
                 android:id="@+id/cadastra_objeto_botao_cancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancelar" />
+                android:text="@string/botao_cancelar" />
         </LinearLayout>
     </LinearLayout>
 

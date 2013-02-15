@@ -152,7 +152,7 @@ public class CadastraObjetoEmprestadoActivity extends Activity {
 
 				// Mostra para o usuário uma mensagem de sucesso na operação
 				Toast.makeText(getApplicationContext(),
-						"Objeto salvo com sucesso!", Toast.LENGTH_LONG).show();
+						getString(R.string.mensagem_objeto_salvo_sucesso), Toast.LENGTH_LONG).show();
 
 				// Define o Alarme
 				if (objetoEmprestado.isLembreteAtivo())

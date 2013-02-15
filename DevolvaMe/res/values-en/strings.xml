@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Titulos -->
+    <string name="title_activity_cadastra_objeto_emprestado">Lend Object</string>
+    <string name="title_activity_lista_objetos_emprestados">Loaned objects</string>
+    <string name="title_activity_preferencia">Preferences</string>
+    
+    <!-- Hints -->
+    <string name="hint_informe_o_nome_do_objeto">Enter the name of the object</string>
+    
+    <!-- Labels -->
+    <string name="label_ativar_lembrete">Enable reminder?</string>
+    <string name="label_data_hora_notificacao">Date/Time of notification</string>
+    <string name="label_data">Date:</string>
+    <string name="label_hora">Time:</string>
+    <string name="label_objeto">Object:</string>
+    <string name="label_emprestado_para">Lent to:</string>
+    
+    <!-- Botoes -->
+    <string name="botao_salvar">Save</string>
+    <string name="botao_cancelar">Cancel</string>
+    <string name="botao_selecionar_contato">Select the Contacts list</string>
+    
+    <!-- Opcoes de Listas e Menus  -->
+    <string name="opcao_emprestar_objeto">Lend object</string>
+    <string name="opcao_listar_objetos_emprestados">List objects borrowed</string>
+    <string name="opcao_preferencias">Preferences</string>
+    <string name="opcao_sair">Exit</string>
+    <string name="opcao_apagar">Delete</string>
+    <string name="opcao_ligar">Call</string>
+    <string name="opcao_enviar_sms">Send SMS</string>
+    
+    <!-- Mensagens apresentadas por Toasts e outros -->
+    <string name="mensagem_objeto_salvo_sucesso">Object saved successfully!</string>
+    <string name="mensagem_registro_removido_sucesso">Registration successfully removed!</string>
+    <string name="mensagem_lembrete_enviado">Reminder sent</string>
+    <string name="mensagem_sms_lembrete_devolvame">Hello, you borrowed my object %1$s if you have not returned. Please return me as soon as possible.</string>
+    
+    <!-- Preferencias -->
+	<string name="summary_som_de_toque_notificacao">Select the ringing sound when the notification is sent a reminder</string>
+	<string name="titulo_som_de_toque_notificacao">Ringing sound notification</string>
+	
+</resources>
